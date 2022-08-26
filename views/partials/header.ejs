@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dark Store</title>
+
+    
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark btn-dark">
+      <div class="container">
+        
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/home"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <% if(currentUser && currentUser.username=='admin') { %>
+            <li class="nav-item active">
+              <a class="nav-link" href="/products/new"
+                >Add Product<span class="sr-only">(current)</span></a
+              >
+            </li>
+            <% } %>
+            <form
+              style="margin-left: 10rem"
+              class="form-inline mr-2 my-lg-0"
+              method="POST"
+              action="/search"
+            >
+              <input
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                name="query"
+              />
+              <button
+                class="btn btn-outline-primary my-2 my-sm-0"
+                type="submit"
+              >
+                Search
+              </button>
+            </form>
+          </ul>
+          <ul class="navbar-nav navbar-right">
+            <% if(!currentUser) { %>
+            <li class="nav-item active">
+              <a class="nav-link" href="/register"
+                >Sign Up <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/login"
+                >Login <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <% } else { %>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                style="color: white"
+              >
+                Welcome <%= currentUser.username %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/orders">My Orders</a>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            </li>
+            <% } %>
+            <li class="nav-item active">
+              <a class="nav-link" href="/cart"
+                ><i class="fas fa-shopping-cart mr-2"></i>Cart<span
+                  class="sr-only"
+                  >(current)</span
+                ></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <% if(success && success.length>0) { %>
+      <div class="alert alert-success mt-3"><%= success %></div>
+      <% } %> <% if(error && error.length>0) { %>
+      <div class="alert alert-dark mt-3"><%= error %></div>
+      <% } %>
+    </div>
+  </body>
+</html>
