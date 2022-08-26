@@ -1,12 +1,12 @@
 {
-  "name": "ecommerce-store",
+  "name": "dark store",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
-  "author": "Ritu singh",
+  "author": "Priyesh soni",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
